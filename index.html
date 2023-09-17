@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signal Strength Simulation</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .transmitter-box {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: 50px; /* Initial position of the transmitter box */
+        }
+
+        .receiver-box {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            position: absolute;
+            top: 100px;
+            left: 100px; /* Initial position of the receiver box */
+        }
+
+        #distance-display {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+        }
+
+        #signal-strength-display {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            font-size: 16px;
+        }
+
+        /* Added styles for input fields and buttons */
+        .input-container {
+            width: 400px;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+
+        .input-container label, .input-container input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for the readings table */
+        #readings-table {
+            width: 400px;
+            margin: 20px;
+            border-collapse: collapse;
+        }
+
+        #readings-table th, #readings-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #readings-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Button styles */
+        .button-container {
+            margin: 20px;
+        }
+
+        .button-container button {
+            margin-right: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>  Signal Strength Simulation  </h1>
+    <h4>Instructions le lo Baccho</h4>
+    <h3>Red Box - Transmitter</h3>
+    <h3>Green Box - Receiver</h3>
+    <p>
+        1. Move the receiver box to the desired location by dragging it with the mouse.<br>
+        2. Enter the required parameters in the input fields.<br>
+
+        3. Click the "Calculate" button to calculate the signal strength at the current location of the receiver box.<br>
+        4. Click the "Take Reading" button to capture the current values and signal strength and add them to the readings table.<br>
+        5. Repeat steps 1 to 4 to capture multiple readings.<br>
+
+
+    </p>
+    <div class="container">
+        <div class="transmitter-box"></div>
+        <div class="receiver-box" id="movable-box"></div>
+        <div id="distance-display">Distance: 2.00 meters</div>
+        <div id="signal-strength-display">Signal Strength: Calculating...</div>
+    </div>
+
+    <!-- User input fields section -->
+    <div class="input-container">
+        <label for="transmitter-power">Transmitter Power (dBm):</label>
+        <input type="number" id="transmitter-power" value="20">
+        
+        <label for="pathloss-exponent">Path Loss Exponent:</label>
+        <input type="number" id="pathloss-exponent" value="2">
+        
+        <label for="carrier-frequency">Carrier Frequency (Hz):</label>
+        <input type="number" id="carrier-frequency" value="2.4e9">
+        
+        <label for="receiver-height">Receiver Antenna Height (meters):</label>
+        <input type="number" id="receiver-height" value="1">
+        
+        <label for="transmitter-height">Transmitter Antenna Height (meters):</label>
+        <input type="number" id="transmitter-height" value="1">
+    </div>
+
+    <!-- Buttons and Readings table section -->
+    <div class="button-container">
+        <button id="calculate-button">Calculate</button>
+        <button id="take-reading-button">Take Reading</button>
+    </div>
+
+    <!-- Readings table -->
+    <table id="readings-table">
+        <thead>
+            <tr>
+                <th>Serial</th>
+                <th>Transmitter Power (dBm)</th>
+                <th>Path Loss Exponent</th>
+                <th>Carrier Frequency (Hz)</th>
+                <th>Receiver Antenna Height (meters)</th>
+                <th>Transmitter Antenna Height (meters)</th>
+                <th>Distance (meters)</th>
+                <th>Signal Strength (dBm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Reading rows will be added dynamically here -->
+        </tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
